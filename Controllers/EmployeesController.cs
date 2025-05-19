@@ -43,8 +43,12 @@ namespace EmployeesManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EmpNo,FirstName,MiddleName,LastName,PhoneNumber,EmailAddress,Country,DOB,Address,Department,Designation,CreatedById,CreatedOn,ModifiedById,ModifiedOn")] Employee employee)
+        public async Task<IActionResult> Create(Employee employee)
         {
+            employee.CreatedById = "Macro Code";
+            employee.CreatedOn = DateTime.Now;
+            employee.ModifiedById = "Macro Code";
+            employee.ModifiedOn = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(employee);
