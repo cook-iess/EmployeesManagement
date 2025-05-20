@@ -4,14 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Employees List</h1>
-
 <p>
-    <a asp-action="Create">Add New Employee</a>
+    <a asp-action="Create" class="btn btn-primary mt-3"><i class="fa fa-plus"></i> Add New Employee</a>
 </p>
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">DataTable with default features</h3>
+        <h3 class="card-title">Employees List</h3>
     </div>
     <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
@@ -35,13 +33,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.EmailAddress)
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                Edit
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DOB)
-            </th>
-            <th></th>
+			<th>
+				View
+			</th>
+			<th>
+				Delete
+			</th>
         </tr>
     </thead>
     <tbody>
@@ -65,16 +66,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EmailAddress)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DOB)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa-solid fa-square-pen"></i> Edit</a>
+			</td>
+			<td>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa fa-eye"></i> View</a>
+			</td>
+			<td>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
             </td>
         </tr>
 }
