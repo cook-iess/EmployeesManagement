@@ -6,14 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeesManagement.Controllers
 {
-    public class CitiesController : Controller
+    public class CitiesController(ApplicationDbContext context) : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public CitiesController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext _context = context;
 
         public async Task<IActionResult> Index()
         {

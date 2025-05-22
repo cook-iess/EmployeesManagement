@@ -5,14 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeesManagement.Controllers
 {
-    public class BanksController : Controller
+    public class BanksController(ApplicationDbContext context) : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public BanksController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext _context = context;
 
         public async Task<IActionResult> Index()
         {
