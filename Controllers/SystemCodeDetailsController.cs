@@ -41,7 +41,7 @@ namespace EmployeesManagement.Controllers
 
         public IActionResult Create()
         {
-            ViewData["SystemCodeId"] = new SelectList(_context.SystemCodes, "Id", "Id");
+            ViewData["SystemCodeId"] = new SelectList(_context.SystemCodes, "Id", "Description");
             return View();
         }
 
@@ -49,19 +49,17 @@ namespace EmployeesManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SystemCodeDetail systemCodeDetail)
         {
-            if (ModelState.IsValid)
-            {
-                systemCodeDetail.CreatedById = "Macro Code";
-                systemCodeDetail.CreatedOn = DateTime.Now;
-                systemCodeDetail.ModifiedById = "Macro Code";
-                systemCodeDetail.ModifiedOn = DateTime.Now;
+            systemCodeDetail.CreatedById = "Macro Code";
+            systemCodeDetail.CreatedOn = DateTime.Now;
+            systemCodeDetail.ModifiedById = "Macro Code";
+            systemCodeDetail.ModifiedOn = DateTime.Now;
 
-                _context.Add(systemCodeDetail);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["SystemCodeId"] = new SelectList(_context.SystemCodes, "Id", "Id", systemCodeDetail.SystemCodeId);
-            return View(systemCodeDetail);
+            _context.Add(systemCodeDetail);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+            //ViewData["SystemCodeId"] = new SelectList(_context.SystemCodes, "Id", "Description", systemCodeDetail.SystemCodeId);
+            //return View(systemCodeDetail);
         }
 
         public async Task<IActionResult> Edit(int? id)

@@ -41,7 +41,7 @@ namespace EmployeesManagement.Controllers
 
         public IActionResult Create()
         {
-            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id");
+            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
             return View();
         }
 
@@ -49,19 +49,17 @@ namespace EmployeesManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(City city)
         {
-            if (ModelState.IsValid)
-            {
-                city.CreatedById = "Macro Code";
-                city.CreatedOn = DateTime.Now;
-                city.ModifiedById = "Macro Code";
-                city.ModifiedOn = DateTime.Now;
+            city.CreatedById = "Macro Code";
+            city.CreatedOn = DateTime.Now;
+            city.ModifiedById = "Macro Code";
+            city.ModifiedOn = DateTime.Now;
 
-                _context.Add(city);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", city.CountryId);
-            return View(city);
+            _context.Add(city);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+            //ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", city.CountryId);
+            //return View(city);
         }
 
         public async Task<IActionResult> Edit(int? id)
