@@ -47,6 +47,11 @@ namespace EmployeesManagement.Controllers
         {
             if (ModelState.IsValid)
             {
+                leaveType.CreatedById = "Macro Code";
+                leaveType.CreatedOn = DateTime.Now;
+                leaveType.ModifiedById = "Macro Code";
+                leaveType.ModifiedOn = DateTime.Now;
+
                 _context.Add(leaveType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -80,6 +85,8 @@ namespace EmployeesManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                leaveType.ModifiedById = "Macro Code";
+                leaveType.ModifiedOn = DateTime.Now;
                 try
                 {
                     _context.Update(leaveType);

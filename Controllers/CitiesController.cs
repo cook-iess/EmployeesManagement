@@ -47,10 +47,15 @@ namespace EmployeesManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,Name,CountryId,CreatedById,CreatedOn,ModifiedById,ModifiedOn")] City city)
+        public async Task<IActionResult> Create(City city)
         {
             if (ModelState.IsValid)
             {
+                city.CreatedById = "Macro Code";
+                city.CreatedOn = DateTime.Now;
+                city.ModifiedById = "Macro Code";
+                city.ModifiedOn = DateTime.Now;
+
                 _context.Add(city);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -77,7 +82,7 @@ namespace EmployeesManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,Name,CountryId,CreatedById,CreatedOn,ModifiedById,ModifiedOn")] City city)
+        public async Task<IActionResult> Edit(int id, City city)
         {
             if (id != city.Id)
             {
@@ -86,6 +91,8 @@ namespace EmployeesManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                city.ModifiedOn = DateTime.Now;
+                city.ModifiedById = "Macro Code";
                 try
                 {
                     _context.Update(city);
