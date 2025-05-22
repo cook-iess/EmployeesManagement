@@ -5,14 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeesManagement.Controllers
 {
-    public class LeaveTypesController : Controller
+    public class LeaveTypesController(ApplicationDbContext context) : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public LeaveTypesController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext _context = context;
 
         public async Task<IActionResult> Index()
         {
