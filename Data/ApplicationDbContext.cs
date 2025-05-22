@@ -18,5 +18,7 @@ namespace EmployeesManagement.Data
         public DbSet<SystemCode> SystemCodes { get; set; }
         public DbSet<SystemCodeDetail> SystemCodesDetail { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
     }
 }
