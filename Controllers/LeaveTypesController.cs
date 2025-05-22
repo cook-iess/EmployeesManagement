@@ -43,7 +43,7 @@ namespace EmployeesManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,Name,CreatedById,CreatedOn,ModifiedById,ModifiedOn")] LeaveType leaveType)
+        public async Task<IActionResult> Create(LeaveType leaveType)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +76,7 @@ namespace EmployeesManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,Name,CreatedById,CreatedOn,ModifiedById,ModifiedOn")] LeaveType leaveType)
+        public async Task<IActionResult> Edit(int id, LeaveType leaveType)
         {
             if (id != leaveType.Id)
             {
