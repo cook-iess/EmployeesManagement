@@ -1,6 +1,6 @@
 ﻿namespace EmployeesManagement.Models
 {
-    public class SystemCodeDetail
+    public class SystemCodeDetail : UserActivity
     {
         public int Id { get; set; }
         public int SystemCodeId { get; set; }

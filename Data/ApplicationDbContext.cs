@@ -17,5 +17,6 @@ namespace EmployeesManagement.Data
         public DbSet<Bank> Banks { get; set; }
         public DbSet<SystemCode> SystemCodes { get; set; }
         public DbSet<SystemCodeDetail> SystemCodesDetail { get; set; }
+        public DbSet<LeaveType> LeaveTypes { get; set; }
     }
 }
