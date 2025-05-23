@@ -9,7 +9,8 @@
 <p>
     <a asp-action="Create" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Add New System Code</a>
 </p>
-<table class="table">
+<div class="card-body">
+    <table id="example1" class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>
@@ -19,18 +20,14 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedById)
+                Edit
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedById)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedOn)
-            </th>
-            <th></th>
+			<th>
+				View
+			</th>
+			<th>
+				Delete
+			</th>
         </tr>
     </thead>
     <tbody>
@@ -43,23 +40,16 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedById)
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2"><i class="fa fa-pencil mr-2"></i> Edit</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning mx-2"><i class="fa fa-eye mr-2"></i> View</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ModifiedById)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedOn)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2"><i class="fa fa-trash mr-2"></i> Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>
