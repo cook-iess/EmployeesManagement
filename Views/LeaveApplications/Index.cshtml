@@ -4,12 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Leave Applications List</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Add New Leave Application</a>
 </p>
-<table class="table">
+<div class="card-body">
+    <table id="example1" class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>
@@ -34,30 +35,17 @@
                 @Html.DisplayNameFor(model => model.Attachment)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ApprovedById)
+                Edit
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ApprovedOn)
+                View
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedById)
+                Delete
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedById)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedOn)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -85,35 +73,19 @@
                 @Html.DisplayFor(modelItem => item.Attachment)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Status.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ApprovedById)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApprovedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedById)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedById)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedOn)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2"><i class="fa fa-pencil mr-2"></i> Edit</a>
+			</td>
+			<td>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning mx-2"><i class="fa fa-eye mr-2"></i> View</a>
+			</td>
+			<td>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2"><i class="fa fa-trash mr-2"></i> Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

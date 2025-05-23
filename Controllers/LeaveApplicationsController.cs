@@ -17,7 +17,7 @@ namespace EmployeesManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.LeaveApplications.Include(l => l.Duration).Include(l => l.Employee).Include(l => l.LeaveType);
+            var applicationDbContext = _context.LeaveApplications.Include(l => l.Duration).Include(l => l.Employee).Include(l => l.LeaveType).Include(l => l.Status);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -32,6 +32,7 @@ namespace EmployeesManagement.Controllers
                 .Include(l => l.Duration)
                 .Include(l => l.Employee)
                 .Include(l => l.LeaveType)
+                .Include(l => l.Status)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (leaveApplication == null)
             {
@@ -41,11 +42,13 @@ namespace EmployeesManagement.Controllers
             return View(leaveApplication);
         }
 
+        // GET: LeaveApplications1/Create
         public IActionResult Create()
         {
             ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id");
-            ViewData["StatusId"] = new SelectList(_context.Employees, "Id", "Id");
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id");
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Id");
+            ViewData["StatusId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id");
             return View();
         }
 
@@ -53,21 +56,22 @@ namespace EmployeesManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(LeaveApplication leaveApplication)
         {
-            //if (ModelState.IsValid)
-            //{
             leaveApplication.CreatedById = "Macro Code";
             leaveApplication.CreatedOn = DateTime.Now;
             leaveApplication.ModifiedById = "Macro Code";
             leaveApplication.ModifiedOn = DateTime.Now;
 
-            _context.Add(leaveApplication);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-            //}
-            //ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id", leaveApplication.DurationId);
-            //ViewData["StatusId"] = new SelectList(_context.Employees, "Id", "Id", leaveApplication.StatusId);
-            //ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Id", leaveApplication.LeaveTypeId);
-            //return View(leaveApplication);
+            if (ModelState.IsValid)
+            {
+                _context.Add(leaveApplication);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id", leaveApplication.DurationId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", leaveApplication.EmployeeId);
+            ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Id", leaveApplication.LeaveTypeId);
+            ViewData["StatusId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id", leaveApplication.StatusId);
+            return View(leaveApplication);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -83,8 +87,9 @@ namespace EmployeesManagement.Controllers
                 return NotFound();
             }
             ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id", leaveApplication.DurationId);
-            ViewData["StatusId"] = new SelectList(_context.Employees, "Id", "Id", leaveApplication.StatusId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", leaveApplication.EmployeeId);
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Id", leaveApplication.LeaveTypeId);
+            ViewData["StatusId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id", leaveApplication.StatusId);
             return View(leaveApplication);
         }
 
@@ -101,6 +106,7 @@ namespace EmployeesManagement.Controllers
             {
                 leaveApplication.ModifiedById = "Macro Code";
                 leaveApplication.ModifiedOn = DateTime.Now;
+
                 try
                 {
                     _context.Update(leaveApplication);
@@ -120,8 +126,9 @@ namespace EmployeesManagement.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id", leaveApplication.DurationId);
-            ViewData["StatusId"] = new SelectList(_context.Employees, "Id", "Id", leaveApplication.StatusId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", leaveApplication.EmployeeId);
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Id", leaveApplication.LeaveTypeId);
+            ViewData["StatusId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id", leaveApplication.StatusId);
             return View(leaveApplication);
         }
 
@@ -136,6 +143,7 @@ namespace EmployeesManagement.Controllers
                 .Include(l => l.Duration)
                 .Include(l => l.Employee)
                 .Include(l => l.LeaveType)
+                .Include(l => l.Status)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (leaveApplication == null)
             {
