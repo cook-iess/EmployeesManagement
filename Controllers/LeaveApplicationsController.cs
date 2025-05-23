@@ -51,18 +51,23 @@ namespace EmployeesManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EmployeeId,NoOfDays,StartDate,EndDate,DurationId,LeaveTypeId,Attachment,Description,StatusId,ApprovedById,ApprovedOn,CreatedById,CreatedOn,ModifiedById,ModifiedOn")] LeaveApplication leaveApplication)
+        public async Task<IActionResult> Create(LeaveApplication leaveApplication)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(leaveApplication);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id", leaveApplication.DurationId);
-            ViewData["StatusId"] = new SelectList(_context.Employees, "Id", "Id", leaveApplication.StatusId);
-            ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Id", leaveApplication.LeaveTypeId);
-            return View(leaveApplication);
+            //if (ModelState.IsValid)
+            //{
+            leaveApplication.CreatedById = "Macro Code";
+            leaveApplication.CreatedOn = DateTime.Now;
+            leaveApplication.ModifiedById = "Macro Code";
+            leaveApplication.ModifiedOn = DateTime.Now;
+
+            _context.Add(leaveApplication);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            //}
+            //ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Id", leaveApplication.DurationId);
+            //ViewData["StatusId"] = new SelectList(_context.Employees, "Id", "Id", leaveApplication.StatusId);
+            //ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Id", leaveApplication.LeaveTypeId);
+            //return View(leaveApplication);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -85,7 +90,7 @@ namespace EmployeesManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,EmployeeId,NoOfDays,StartDate,EndDate,DurationId,LeaveTypeId,Attachment,Description,StatusId,ApprovedById,ApprovedOn,CreatedById,CreatedOn,ModifiedById,ModifiedOn")] LeaveApplication leaveApplication)
+        public async Task<IActionResult> Edit(int id, LeaveApplication leaveApplication)
         {
             if (id != leaveApplication.Id)
             {
@@ -94,6 +99,8 @@ namespace EmployeesManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                leaveApplication.ModifiedById = "Macro Code";
+                leaveApplication.ModifiedOn = DateTime.Now;
                 try
                 {
                     _context.Update(leaveApplication);

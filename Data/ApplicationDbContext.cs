@@ -22,7 +22,7 @@ namespace EmployeesManagement.Data
             }
 
             builder.Entity<LeaveApplication>()
-                .HasOne(f => f.Employee)
+                .HasOne(f => f.Status)
                 .WithMany()
                 .HasForeignKey(f => f.StatusId)
                 .OnDelete(DeleteBehavior.Cascade);
