@@ -4,10 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>LeaveApplication</h4>
+<h4>Add LeaveApplication</h4>
 <hr />
+<div class="card-body">
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Create">
@@ -54,40 +53,11 @@
                 <select asp-for="StatusId" class ="form-control" asp-items="ViewBag.StatusId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="ApprovedById" class="control-label"></label>
-                <input asp-for="ApprovedById" class="form-control" />
-                <span asp-validation-for="ApprovedById" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ApprovedOn" class="control-label"></label>
-                <input asp-for="ApprovedOn" class="form-control" />
-                <span asp-validation-for="ApprovedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedById" class="control-label"></label>
-                <input asp-for="CreatedById" class="form-control" />
-                <span asp-validation-for="CreatedById" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedOn" class="control-label"></label>
-                <input asp-for="CreatedOn" class="form-control" />
-                <span asp-validation-for="CreatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModifiedById" class="control-label"></label>
-                <input asp-for="ModifiedById" class="form-control" />
-                <span asp-validation-for="ModifiedById" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModifiedOn" class="control-label"></label>
-                <input asp-for="ModifiedOn" class="form-control" />
-                <span asp-validation-for="ModifiedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
+</div>
 </div>
 
 <div>
