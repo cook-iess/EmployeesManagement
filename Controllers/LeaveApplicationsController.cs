@@ -48,7 +48,6 @@ namespace EmployeesManagement.Controllers
             ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail.Include(x => x.SystemCode).Where(y => y.Code == "LED"), "Id", "Description");
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName");
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Name");
-            ViewData["StatusId"] = new SelectList(_context.SystemCodesDetail, "Id", "Description");
             return View();
         }
 
@@ -70,7 +69,6 @@ namespace EmployeesManagement.Controllers
             ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Description", leaveApplication.DurationId);
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName", leaveApplication.EmployeeId);
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Name", leaveApplication.LeaveTypeId);
-            ViewData["StatusId"] = new SelectList(_context.SystemCodesDetail, "Id", "Description", leaveApplication.StatusId);
             return View(leaveApplication);
         }
 
@@ -89,7 +87,6 @@ namespace EmployeesManagement.Controllers
             ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Description", leaveApplication.DurationId);
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName", leaveApplication.EmployeeId);
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Name", leaveApplication.LeaveTypeId);
-            ViewData["StatusId"] = new SelectList(_context.SystemCodesDetail, "Id", "Description", leaveApplication.StatusId);
             return View(leaveApplication);
         }
 
@@ -128,7 +125,6 @@ namespace EmployeesManagement.Controllers
             ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Description", leaveApplication.DurationId);
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName", leaveApplication.EmployeeId);
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Name", leaveApplication.LeaveTypeId);
-            ViewData["StatusId"] = new SelectList(_context.SystemCodesDetail, "Id", "Description", leaveApplication.StatusId);
             return View(leaveApplication);
         }
 
