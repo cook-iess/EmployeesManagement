@@ -38,13 +38,7 @@
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                Edit
-            </th>
-            <th>
-                View
-            </th>
-            <th>
-                Delete
+					@Html.DisplayName("Actions")
             </th>
         </tr>
     </thead>
@@ -75,15 +69,35 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Status.Description)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2"><i class="fa fa-pencil mr-2"></i> Edit</a>
-			</td>
-			<td>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning mx-2"><i class="fa fa-eye mr-2"></i> View</a>
-			</td>
-			<td>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2"><i class="fa fa-trash mr-2"></i> Delete</a>
-            </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-cogs"></i> Actions <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@item.Id">
+                                <li>
+                                    <a class="dropdown-item" asp-action="Approve" asp-route-id="@item.Id">
+                                        <i class="fa fa-check text-success"></i> Approve
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Id">
+                                        <i class="fa fa-pencil text-primary"></i> Edit
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">
+                                        <i class="fa fa-eye text-warning"></i> View
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">
+                                        <i class="fa fa-trash text-danger"></i> Delete
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
         </tr>
 }
     </tbody>
