@@ -45,7 +45,7 @@ namespace EmployeesManagement.Controllers
         // GET: LeaveApplications1/Create
         public IActionResult Create()
         {
-            ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail.Include(x => x.SystemCode).Where(y => y.Code == "LED"), "Id", "Description");
+            ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail.Include(x => x.SystemCode).Where(y => y.SystemCode.Code == "LED"), "Id", "Description");
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName");
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Name");
             return View();
@@ -55,21 +55,26 @@ namespace EmployeesManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(LeaveApplication leaveApplication)
         {
+            var pendingStatus = _context.SystemCodesDetail.Include(x => x.SystemCode)
+                .Where(y => y.Code == "PD" && y.SystemCode.Code == "LAS");
+
             leaveApplication.CreatedById = "Macro Code";
             leaveApplication.CreatedOn = DateTime.Now;
             leaveApplication.ModifiedById = "Macro Code";
             leaveApplication.ModifiedOn = DateTime.Now;
 
-            if (ModelState.IsValid)
-            {
-                _context.Add(leaveApplication);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Description", leaveApplication.DurationId);
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName", leaveApplication.EmployeeId);
-            ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Name", leaveApplication.LeaveTypeId);
-            return View(leaveApplication);
+            leaveApplication.StatusId = pendingStatus.FirstOrDefault()?.Id ?? 0;
+
+            //if (ModelState.IsValid)
+            //{
+            _context.Add(leaveApplication);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            //}
+            //ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail.Include(x => x.SystemCode).Where(y => y.SystemCode.Code == "LED"), "Id", "Description", leaveApplication.DurationId);
+            //ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName", leaveApplication.EmployeeId);
+            //ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Name", leaveApplication.LeaveTypeId);
+            //return View(leaveApplication);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -84,7 +89,7 @@ namespace EmployeesManagement.Controllers
             {
                 return NotFound();
             }
-            ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Description", leaveApplication.DurationId);
+            ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail.Include(x => x.SystemCode).Where(y => y.SystemCode.Code == "LED"), "Id", "Description", leaveApplication.DurationId);
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName", leaveApplication.EmployeeId);
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Name", leaveApplication.LeaveTypeId);
             return View(leaveApplication);
@@ -101,8 +106,13 @@ namespace EmployeesManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                var pendingStatus = _context.SystemCodesDetail.Include(x => x.SystemCode)
+                    .Where(y => y.Code == "PD" && y.SystemCode.Code == "LAS");
+
                 leaveApplication.ModifiedById = "Macro Code";
                 leaveApplication.ModifiedOn = DateTime.Now;
+
+                leaveApplication.StatusId = pendingStatus.FirstOrDefault()?.Id ?? 0;
 
                 try
                 {
@@ -122,7 +132,7 @@ namespace EmployeesManagement.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail, "Id", "Description", leaveApplication.DurationId);
+            ViewData["DurationId"] = new SelectList(_context.SystemCodesDetail.Include(x => x.SystemCode).Where(y => y.SystemCode.Code == "LED"), "Id", "Description", leaveApplication.DurationId);
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName", leaveApplication.EmployeeId);
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Name", leaveApplication.LeaveTypeId);
             return View(leaveApplication);
