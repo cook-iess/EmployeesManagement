@@ -4,13 +4,25 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    .table-fixed {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .dropdown-menu {
+        min-width: 120px; /* Prevent huge width jumps */
+    }
+</style>
+
+
 <h1>Leave Applications List</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Add New Leave Application</a>
 </p>
 <div class="card-body">
-    <table id="example1" class="table table-bordered table-striped">
+<table id="example1" class="table table-bordered table-striped table-fixed">
     <thead>
         <tr>
             <th>
@@ -71,33 +83,26 @@
             </td>
                     <td>
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-cogs"></i> Actions <i class="fa fa-angle-down"></i>
+                            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="actionDropdown_@item.Id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Actions
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@item.Id">
-                                <li>
-                                    <a class="dropdown-item" asp-action="Approve" asp-route-id="@item.Id">
-                                        <i class="fa fa-check text-success"></i> Approve
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Id">
-                                        <i class="fa fa-pencil text-primary"></i> Edit
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">
-                                        <i class="fa fa-eye text-warning"></i> View
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">
-                                        <i class="fa fa-trash text-danger"></i> Delete
-                                    </a>
-                                </li>
-                            </ul>
+                            <div class="dropdown-menu" aria-labelledby="actionDropdown_@item.Id">
+                                <a class="dropdown-item text-success" asp-action="Approve" asp-route-id="@item.Id">
+                                    <i class="fa fa-check mr-1"></i> Approve
+                                </a>
+                                <a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.Id">
+                                    <i class="fa fa-pencil mr-1"></i> Edit
+                                </a>
+                                <a class="dropdown-item text-warning" asp-action="Details" asp-route-id="@item.Id">
+                                    <i class="fa fa-eye mr-1"></i> View
+                                </a>
+                                <a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                    <i class="fa fa-trash mr-1"></i> Delete
+                                </a>
+                            </div>
                         </div>
                     </td>
+
         </tr>
 }
     </tbody>
