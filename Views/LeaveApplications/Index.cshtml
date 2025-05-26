@@ -7,14 +7,17 @@
 <h1>Leave Applications</h1>
 
 <div class="card mb-4">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Manage Leave Applications</h5>
-        <a asp-action="Create" class="btn btn-primary">
-            <i class="fa fa-plus"></i> Add New
-        </a>
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Manage Leave Applications</h5>
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Add New Leave Appplication
+            </a>
+        </div>
     </div>
+
     <div class="card-body">
-        <div class="table-responsive">
+        <div class="table">
             <table id="example1" class="table table-hover table-bordered table-striped">
                 <thead class="table-light">
                     <tr>
@@ -43,29 +46,30 @@
                             <td>@Html.DisplayFor(modelItem => item.Status.Description)</td>
                             <td>
                                 <div class="dropdown">
-                                    <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="actionDropdown_@item.Id"
-                                    aria-expanded="false" data-toggle="dropdown" aria-haspopup="true">
+                                    <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button"
+                                            id="actionDropdown_@item.Id" data-toggle="dropdown" data-bs-popper="static"
+                                            aria-expanded="false">
                                         <i class="fa fa-cogs"></i> Actions
                                     </button>
                                     <ul class="dropdown-menu shadow-sm" aria-labelledby="actionDropdown_@item.Id">
                                         <li>
                                             <a class="dropdown-item text-success" asp-action="Approve" asp-route-id="@item.Id">
-                                                <i class="fa fa-check mr-1"></i> Approve
+                                                <i class="fa fa-check me-2"></i> Approve
                                             </a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.Id">
-                                                <i class="fa fa-pencil mr-1"></i> Edit
+                                                <i class="fa fa-pencil me-2"></i> Edit
                                             </a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item text-warning" asp-action="Details" asp-route-id="@item.Id">
-                                                <i class="fa fa-eye mr-1"></i> View
+                                                <i class="fa fa-eye me-2"></i> View
                                             </a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@item.Id">
-                                                <i class="fa fa-trash mr-1"></i> Delete
+                                                <i class="fa fa-trash me-2"></i> Delete
                                             </a>
                                         </li>
                                     </ul>
