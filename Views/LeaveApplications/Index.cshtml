@@ -1,110 +1,80 @@
 ﻿@model IEnumerable<EmployeesManagement.Models.LeaveApplication>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Leave Applications";
 }
 
-<style>
-    .table-fixed {
-        table-layout: fixed;
-        width: 100%;
-    }
+<h1>Leave Applications</h1>
 
-    .dropdown-menu {
-        min-width: 120px; /* Prevent huge width jumps */
-    }
-</style>
-
-
-<h1>Leave Applications List</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Add New Leave Application</a>
-</p>
-<div class="card-body">
-<table id="example1" class="table table-bordered table-striped table-fixed">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NoOfDays)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LeaveType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Attachment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-					@Html.DisplayName("Actions")
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoOfDays)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LeaveType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attachment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status.Description)
-            </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="actionDropdown_@item.Id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Actions
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="actionDropdown_@item.Id">
-                                <a class="dropdown-item text-success" asp-action="Approve" asp-route-id="@item.Id">
-                                    <i class="fa fa-check mr-1"></i> Approve
-                                </a>
-                                <a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.Id">
-                                    <i class="fa fa-pencil mr-1"></i> Edit
-                                </a>
-                                <a class="dropdown-item text-warning" asp-action="Details" asp-route-id="@item.Id">
-                                    <i class="fa fa-eye mr-1"></i> View
-                                </a>
-                                <a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@item.Id">
-                                    <i class="fa fa-trash mr-1"></i> Delete
-                                </a>
-                            </div>
-                        </div>
-                    </td>
-
-        </tr>
-}
-    </tbody>
-</table>
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Manage Leave Applications</h5>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fa fa-plus"></i> Add New
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example1" class="table table-hover table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Employee)</th>
+                        <th>@Html.DisplayNameFor(model => model.NoOfDays)</th>
+                        <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+                        <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+                        <th>@Html.DisplayNameFor(model => model.Duration)</th>
+                        <th>@Html.DisplayNameFor(model => model.LeaveType)</th>
+                        <th>@Html.DisplayNameFor(model => model.Attachment)</th>
+                        <th>@Html.DisplayNameFor(model => model.Status)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Employee.FullName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NoOfDays)</td>
+                            <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Duration.Description)</td>
+                            <td>@Html.DisplayFor(modelItem => item.LeaveType.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Attachment)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Status.Description)</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="actionDropdown_@item.Id"
+                                    aria-expanded="false" data-toggle="dropdown" aria-haspopup="true">
+                                        <i class="fa fa-cogs"></i> Actions
+                                    </button>
+                                    <ul class="dropdown-menu shadow-sm" aria-labelledby="actionDropdown_@item.Id">
+                                        <li>
+                                            <a class="dropdown-item text-success" asp-action="Approve" asp-route-id="@item.Id">
+                                                <i class="fa fa-check mr-1"></i> Approve
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.Id">
+                                                <i class="fa fa-pencil mr-1"></i> Edit
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-warning" asp-action="Details" asp-route-id="@item.Id">
+                                                <i class="fa fa-eye mr-1"></i> View
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                                <i class="fa fa-trash mr-1"></i> Delete
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

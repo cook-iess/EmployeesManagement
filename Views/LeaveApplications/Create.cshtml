@@ -34,15 +34,15 @@
                         <input asp-for="EndDate" class="form-control" />
                         <span asp-validation-for="EndDate" class="text-danger"></span>
                     </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label asp-for="DurationId" class="form-label"></label>
                         <select asp-for="DurationId" class="form-control" asp-items="ViewBag.DurationId"></select>
                         <span asp-validation-for="DurationId" class="text-danger"></span>
                     </div>
-                </div>
-
-                <!-- Right Column -->
-                <div class="col-md-6">
                     <div class="mb-3">
                         <label asp-for="LeaveTypeId" class="form-label"></label>
                         <select asp-for="LeaveTypeId" class="form-control" asp-items="ViewBag.LeaveTypeId"></select>
