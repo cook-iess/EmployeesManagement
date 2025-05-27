@@ -17,7 +17,39 @@ namespace EmployeesManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.LeaveApplications.Include(l => l.Duration).Include(l => l.Employee).Include(l => l.LeaveType).Include(l => l.Status);
+            var applicationDbContext = _context.LeaveApplications
+                .Include(l => l.Duration)
+                .Include(l => l.Employee)
+                .Include(l => l.LeaveType)
+                .Include(l => l.Status);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> ApprovedLeaveApplications()
+        {
+            var appprovedStatus = _context.SystemCodesDetail.Include(x => x.SystemCode)
+                .Where(y => y.Code == "AD" && y.SystemCode.Code == "LAS").FirstOrDefault();
+
+            var applicationDbContext = _context.LeaveApplications
+                .Include(l => l.Duration)
+                .Include(l => l.Employee)
+                .Include(l => l.LeaveType)
+                .Include(l => l.Status)
+                .Where(l => l.StatusId == appprovedStatus!.Id);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> RejectedLeaveApplications()
+        {
+            var rejectedStatus = _context.SystemCodesDetail.Include(x => x.SystemCode)
+                .Where(y => y.Code == "RD" && y.SystemCode.Code == "LAS").FirstOrDefault();
+
+            var applicationDbContext = _context.LeaveApplications
+                .Include(l => l.Duration)
+                .Include(l => l.Employee)
+                .Include(l => l.LeaveType)
+                .Include(l => l.Status)
+                .Where(l => l.StatusId == rejectedStatus!.Id);
             return View(await applicationDbContext.ToListAsync());
         }
 
