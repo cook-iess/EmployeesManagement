@@ -4,57 +4,57 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Bank Details</h1>
 
-<div>
-    <h4>Bank</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Code)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Code)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AccountNo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AccountNo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedById)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedById)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModifiedById)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModifiedById)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModifiedOn)
-        </dd>
-    </dl>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Basic Information</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Code)</th>
+                    <td>@Html.DisplayFor(model => model.Code)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.AccountNo)</th>
+                    <td>@Html.DisplayFor(model => model.AccountNo)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h4 class="card-title">Audit Information</h4>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.CreatedById)</th>
+                    <td>@Html.DisplayFor(model => model.CreatedById)</td>
+                    <th>@Html.DisplayNameFor(model => model.CreatedOn)</th>
+                    <td>@Html.DisplayFor(model => model.CreatedOn)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.ModifiedById)</th>
+                    <td>@Html.DisplayFor(model => model.ModifiedById)</td>
+                    <th>@Html.DisplayNameFor(model => model.ModifiedOn)</th>
+                    <td>@Html.DisplayFor(model => model.ModifiedOn)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="mt-3 pb-2">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
