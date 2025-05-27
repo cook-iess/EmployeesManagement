@@ -1,61 +1,69 @@
 ﻿@model IEnumerable<EmployeesManagement.Models.Bank>
 
+
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Banks List</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Add New Bank</a>
-</p>
-<div class="card-body">
-    <table id="example1" class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AccountNo)
-            </th>
-            <th>
-                Edit
-            </th>
-            <th>
-                View
-            </th>
-            <th>
-                Delete
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountNo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2"><i class="fa fa-pencil mr-2"></i> Edit</a>
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning mx-2"><i class="fa fa-eye mr-2"></i> View</a>
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2"><i class="fa fa-trash mr-2"></i> Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Manage Banks</h5>
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Add New Bank
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table">
+            <table id="example1" class="table table-hover table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Code)</th>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.AccountNo)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AccountNo)</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button"
+                                            id="actionDropdown_@item.Id" data-toggle="dropdown" data-bs-popper="static"
+                                            aria-expanded="false">
+                                        <i class="fa fa-cogs"></i> Actions
+                                    </button>
+                                    <ul class="dropdown-menu shadow-sm" aria-labelledby="actionDropdown_@item.Id">
+                                        <li>
+                                            <a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.Id">
+                                                <i class="fa fa-pencil me-2 mr-2"></i> Edit
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-warning" asp-action="Details" asp-route-id="@item.Id">
+                                                <i class="fa fa-eye me-2 mr-2"></i> View
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                                <i class="fa fa-trash me-2 mr-2"></i> Delete
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
