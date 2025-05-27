@@ -85,7 +85,11 @@
 </div>
 
 <form asp-action="ApproveLeave" method="post">
-    <div class="mt-3 pb-2">
+    <div class="mt-3">
+		<label asp-for="ApprovalNotes" class="control-label"></label>
+		<textarea class="form-control" asp-for="ApprovalNotes"></textarea>
+    </div>
+    <div class="mt-3 pb-3">
         <input type="submit" class="btn btn-primary" value="Approve Leave Application" /> | 
         <a asp-action="Index">Back to List</a>
     </div>
