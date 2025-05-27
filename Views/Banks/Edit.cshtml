@@ -4,42 +4,80 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit Bank</h1>
 
-<h3>Bank</h3>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card mb-4">
+    <div class="card-body">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Code" class="control-label"></label>
-                <input asp-for="Code" class="form-control" />
-                <span asp-validation-for="Code" class="text-danger"></span>
+
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Code" class="control-label"></label>
+                        <input asp-for="Code" class="form-control" />
+                        <span asp-validation-for="Code" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label asp-for="AccountNo" class="control-label"></label>
+                        <input asp-for="AccountNo" class="form-control" />
+                        <span asp-validation-for="AccountNo" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+
+            <hr />
+
+            <h5>Audit Information</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="CreatedById" class="form-label"></label>
+                        <input asp-for="CreatedById" class="form-control" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CreatedOn" class="form-label"></label>
+                        <input asp-for="CreatedOn" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="ModifiedById" class="form-label"></label>
+                        <input asp-for="ModifiedById" class="form-control" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ModifiedOn" class="form-label"></label>
+                        <input asp-for="ModifiedOn" class="form-control" readonly />
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="AccountNo" class="control-label"></label>
-                <input asp-for="AccountNo" class="form-control" />
-                <span asp-validation-for="AccountNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="mt-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i> Save Changes
+                </button> | 
+                <a asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
