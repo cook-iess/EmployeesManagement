@@ -64,7 +64,7 @@ namespace EmployeesManagement.Controllers
         public async Task<IActionResult> ApproveLeave(LeaveApplication leave)
         {
             var approvedStatus = _context.SystemCodesDetail.Include(x => x.SystemCode)
-                .Where(y => y.Code == "AP" && y.SystemCode.Code == "LAS");
+                .Where(y => y.Code == "AD" && y.SystemCode.Code == "LAS");
 
             var leaveApplication = await _context.LeaveApplications
                 .Include(l => l.Duration)
