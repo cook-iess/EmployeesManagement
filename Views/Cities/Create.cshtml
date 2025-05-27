@@ -4,43 +4,54 @@
     ViewData["Title"] = "Create";
 }
 
-<h4>Add New City</h4>
-<hr />
-<div class="row">
-    <div class="col-md-12">
+<h1>Add New City</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="row">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <div class="row g-3">
+                <!-- Left Column -->
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label asp-for="Code" class="control-label"></label>
                         <input asp-for="Code" class="form-control" />
                         <span asp-validation-for="Code" class="text-danger"></span>
                     </div>
+                    
                 </div>
+
+                <!-- Right Column -->
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label asp-for="Name" class="control-label"></label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-group col-md-12">
-                    <label asp-for="CountryId" class="control-label"></label>
-                    <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label asp-for="CountryId" class="control-label"></label>
+                        <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </div>  
+            </div>
+
+            <hr />
+
+            <div class="mt-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i> Save City
+                </button> |
+                <a asp-action="Index">Back to List</a>
+            </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
