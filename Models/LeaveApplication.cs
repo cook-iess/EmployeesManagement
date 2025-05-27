@@ -25,5 +25,7 @@ namespace EmployeesManagement.Models
         [Display(Name = "Status")]
         public int StatusId { get; set; }
         public SystemCodeDetail Status { get; set; }
+        [Display(Name = "Approval Notes")]
+        public string ApprovalNotes { get; set; }
     }
 }
