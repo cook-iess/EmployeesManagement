@@ -115,6 +115,7 @@ namespace EmployeesManagement.Controllers
             leaveApplication.ApprovedOn = DateTime.Now;
             leaveApplication.ApprovedById = "Macro Code";
             leaveApplication.StatusId = rejectedStatus.FirstOrDefault()?.Id ?? 0;
+            leaveApplication.ApprovalNotes = leave.ApprovalNotes;
 
             leaveApplication.ModifiedOn = DateTime.Now;
 
@@ -164,6 +165,7 @@ namespace EmployeesManagement.Controllers
             leaveApplication.ApprovedOn = DateTime.Now;
             leaveApplication.ApprovedById = "Macro Code";
             leaveApplication.StatusId = approvedStatus.FirstOrDefault()?.Id ?? 0;
+            leaveApplication.ApprovalNotes = leave.ApprovalNotes;
 
             leaveApplication.ModifiedOn = DateTime.Now;
 
