@@ -17,11 +17,15 @@ namespace EmployeesManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var awaitingStatus = _context.SystemCodesDetail.Include(x => x.SystemCode)
+                .Where(y => y.Code == "AP" && y.SystemCode.Code == "LAS").FirstOrDefault();
+
             var applicationDbContext = _context.LeaveApplications
                 .Include(l => l.Duration)
                 .Include(l => l.Employee)
                 .Include(l => l.LeaveType)
-                .Include(l => l.Status);
+                .Include(l => l.Status)
+                .Where(l => l.StatusId == awaitingStatus!.Id);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -187,7 +191,7 @@ namespace EmployeesManagement.Controllers
         public async Task<IActionResult> Create(LeaveApplication leaveApplication)
         {
             var pendingStatus = _context.SystemCodesDetail.Include(x => x.SystemCode)
-                .Where(y => y.Code == "PD" && y.SystemCode.Code == "LAS");
+                .Where(y => y.Code == "AP" && y.SystemCode.Code == "LAS");
 
             leaveApplication.CreatedById = "Macro Code";
             leaveApplication.CreatedOn = DateTime.Now;
