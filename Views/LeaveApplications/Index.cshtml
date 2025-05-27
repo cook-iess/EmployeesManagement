@@ -54,22 +54,27 @@
                                     <ul class="dropdown-menu shadow-sm" aria-labelledby="actionDropdown_@item.Id">
                                         <li>
                                             <a class="dropdown-item text-success" asp-action="ApproveLeave" asp-route-id="@item.Id">
-                                                <i class="fa fa-check me-2"></i> Approve
+                                                <i class="fa fa-check me-2 mr-1"></i> Approve
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-danger" asp-action="RejectLeave" asp-route-id="@item.Id">
+                                                <i class="fa fa-close me-2 mr-2"></i> Reject
                                             </a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.Id">
-                                                <i class="fa fa-pencil me-2"></i> Edit
+                                                <i class="fa fa-pencil me-2 mr-2"></i> Edit
                                             </a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item text-warning" asp-action="Details" asp-route-id="@item.Id">
-                                                <i class="fa fa-eye me-2"></i> View
+                                                <i class="fa fa-eye me-2 mr-2"></i> View
                                             </a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@item.Id">
-                                                <i class="fa fa-trash me-2"></i> Delete
+                                                <i class="fa fa-trash me-2 mr-2"></i> Delete
                                             </a>
                                         </li>
                                     </ul>
