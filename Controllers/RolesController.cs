@@ -60,7 +60,7 @@ namespace EmployeesManagement.Controllers
 
             var role = new RolesViewModel();
             role.RoleName = result.Name;
-            role.RoleId = result.Id;
+            role.Id = result.Id;
 
             return View(role);
         }
