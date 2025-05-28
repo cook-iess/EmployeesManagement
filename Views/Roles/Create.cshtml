@@ -1,0 +1,40 @@
+﻿@model EmployeesManagement.ViewModels.RolesViewModel
+
+@{
+    ViewData["Title"] = "System Roles";
+}
+
+<h1>Create New Role</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label asp-for="RoleName" class="form-label"></label>
+                        <input asp-for="RoleName" type="text" class="form-control" />
+                        <span asp-validation-for="RoleName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="mt-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i> Save Role
+                </button> |
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

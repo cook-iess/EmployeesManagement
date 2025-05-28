@@ -35,6 +35,7 @@ namespace EmployeesManagement.Controllers
             //ViewBag.Roles = roles;
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UsersViewModel model)

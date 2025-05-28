@@ -1,4 +1,5 @@
 ﻿using EmployeesManagement.Data;
+using EmployeesManagement.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,35 @@ namespace EmployeesManagement.Controllers
             var roles = await _context.Roles.ToListAsync();
             return View(roles);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            //var roles = await _roleManager.Roles.ToListAsync();
+            //ViewBag.Roles = roles;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(RolesViewModel model)
+        {
+            IdentityRole role = new()
+            {
+                Name = model.RoleName
+            };
+
+            var result = await _roleManager.CreateAsync(role);
+
+            if (result.Succeeded)
+                return RedirectToAction("Index");
+
+            return View(model);
+        }
     }
+
+
+}
 }
 
 
