@@ -40,6 +40,11 @@ namespace EmployeesManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(RolesViewModel model)
         {
+            var roleExist = _roleManager.RoleExistsAsync(model.RoleName);
+
+            if (roleExist.Result)
+                return View(model);
+
             IdentityRole role = new()
             {
                 Name = model.RoleName
