@@ -1,4 +1,5 @@
 ﻿using EmployeesManagement.Data;
+using EmployeesManagement.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,36 @@ namespace EmployeesManagement.Controllers
         {
             var user = await _context.Users.ToListAsync();
             return View(user);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            //var roles = await _roleManager.Roles.ToListAsync();
+            //ViewBag.Roles = roles;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(UsersViewModel model)
+        {
+            IdentityUser user = new()
+            {
+                UserName = model.Username,
+                NormalizedUserName = model.Username.ToUpper(),
+                Email = model.Email,
+                NormalizedEmail = model.Email.ToUpper(),
+                EmailConfirmed = true,
+                PhoneNumber = model.PhoneNumber,
+                PhoneNumberConfirmed = true,
+
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+                return RedirectToAction("Index");
+
+            return View(model);
         }
     }
 }
