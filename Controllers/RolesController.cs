@@ -52,5 +52,32 @@ namespace EmployeesManagement.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var result = await _roleManager.FindByIdAsync(id);
+
+            var role = new RolesViewModel();
+            role.RoleName = result.Name;
+            role.RoleId = result.Id;
+
+            return View(role);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, RolesViewModel model)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+            role.Name = model.RoleName;
+
+            var result = await _roleManager.UpdateAsync(role);
+
+            if (result.Succeeded)
+                return RedirectToAction("Index");
+
+            return View(model);
+        }
     }
 }
