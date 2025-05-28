@@ -69,6 +69,11 @@ namespace EmployeesManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, RolesViewModel model)
         {
+            var roleExist = await _roleManager.RoleExistsAsync(model.RoleName);
+
+            if (roleExist)
+                return View(model);
+
             var role = await _roleManager.FindByIdAsync(id);
             role.Name = model.RoleName;
 
