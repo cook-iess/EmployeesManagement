@@ -53,10 +53,4 @@ namespace EmployeesManagement.Controllers
             return View(model);
         }
     }
-
-
 }
-}
-
-
-
