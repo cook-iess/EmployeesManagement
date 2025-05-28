@@ -25,7 +25,7 @@ namespace EmployeesManagement.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _context.Users.ToListAsync();
-            return View();
+            return View(user);
         }
     }
 }
