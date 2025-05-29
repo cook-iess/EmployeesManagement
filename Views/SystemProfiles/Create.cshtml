@@ -4,59 +4,55 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Create New System Profile</h1>
 
-<h4>SystemProfile</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card mb-4">
+    <div class="card-body">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <div class="row g-3">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Order" class="form-label"></label>
+                        <input asp-for="Order" class="form-control" />
+                        <span asp-validation-for="Order" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3 col-md-12">
+                    <label asp-for="ProfileId" class="control-label"></label>
+                    <select asp-for="ProfileId" class="form-control" asp-items="ViewBag.ProfileId">
+                        <option value="" style="color: dimgray">Select System Profile</option>
+                    </select>
+                    <span asp-validation-for="ProfileId" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ProfileId" class="control-label"></label>
-                <select asp-for="ProfileId" class ="form-control" asp-items="ViewBag.ProfileId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Order" class="control-label"></label>
-                <input asp-for="Order" class="form-control" />
-                <span asp-validation-for="Order" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedById" class="control-label"></label>
-                <input asp-for="CreatedById" class="form-control" />
-                <span asp-validation-for="CreatedById" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedOn" class="control-label"></label>
-                <input asp-for="CreatedOn" class="form-control" />
-                <span asp-validation-for="CreatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModifiedById" class="control-label"></label>
-                <input asp-for="ModifiedById" class="form-control" />
-                <span asp-validation-for="ModifiedById" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModifiedOn" class="control-label"></label>
-                <input asp-for="ModifiedOn" class="form-control" />
-                <span asp-validation-for="ModifiedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <hr />
+
+            <div class="mt-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i> Save System Profile
+                </button> | 
+                <a asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

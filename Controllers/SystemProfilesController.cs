@@ -41,21 +41,26 @@ namespace EmployeesManagement.Controllers
 
         public IActionResult Create()
         {
-            ViewData["ProfileId"] = new SelectList(_context.SystemProfiles, "Id", "Id");
+            ViewData["ProfileId"] = new SelectList(_context.SystemProfiles, "Id", "Name");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ProfileId,Order,CreatedById,CreatedOn,ModifiedById,ModifiedOn")] SystemProfile systemProfile)
+        public async Task<IActionResult> Create(SystemProfile systemProfile)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(systemProfile);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ProfileId"] = new SelectList(_context.SystemProfiles, "Id", "Id", systemProfile.ProfileId);
+            //if (ModelState.IsValid)
+            //{
+            systemProfile.CreatedById = "Macro Code";
+            systemProfile.CreatedOn = DateTime.Now;
+            systemProfile.ModifiedById = "Macro Id";
+            systemProfile.ModifiedOn = DateTime.Now;
+
+            _context.Add(systemProfile);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            //}
+            ViewData["ProfileId"] = new SelectList(_context.SystemProfiles, "Id", "Name", systemProfile.ProfileId);
             return View(systemProfile);
         }
 
@@ -77,7 +82,7 @@ namespace EmployeesManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ProfileId,Order,CreatedById,CreatedOn,ModifiedById,ModifiedOn")] SystemProfile systemProfile)
+        public async Task<IActionResult> Edit(int id, SystemProfile systemProfile)
         {
             if (id != systemProfile.Id)
             {
@@ -86,6 +91,9 @@ namespace EmployeesManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                systemProfile.ModifiedById = "Macro Id";
+                systemProfile.ModifiedOn = DateTime.Now;
+
                 try
                 {
                     _context.Update(systemProfile);
