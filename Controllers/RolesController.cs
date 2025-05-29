@@ -1,4 +1,5 @@
 ﻿using EmployeesManagement.Data;
+using EmployeesManagement.Models;
 using EmployeesManagement.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,12 +10,12 @@ namespace EmployeesManagement.Controllers
     public class RolesController : Controller
     {
 
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
 
-        public RolesController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, ApplicationDbContext context)
+        public RolesController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -63,9 +64,11 @@ namespace EmployeesManagement.Controllers
         {
             var result = await _roleManager.FindByIdAsync(id);
 
-            var role = new RolesViewModel();
-            role.RoleName = result.Name;
-            role.Id = result.Id;
+            var role = new RolesViewModel
+            {
+                RoleName = result.Name,
+                Id = result.Id
+            };
 
             return View(role);
         }
