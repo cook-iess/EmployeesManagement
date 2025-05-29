@@ -4,6 +4,7 @@ using EmployeesManagement.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeesManagement.Controllers
@@ -33,7 +34,7 @@ namespace EmployeesManagement.Controllers
         public async Task<IActionResult> Create()
         {
             //var roles = await _roleManager.Roles.ToListAsync();
-            //ViewBag.Roles = roles;
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name");
             return View();
         }
 
@@ -43,6 +44,10 @@ namespace EmployeesManagement.Controllers
         {
             ApplicationUser user = new()
             {
+                FirstName = model.FirstName,
+                MiddleName = model.MiddleName,
+                LastName = model.LastName,
+                NationalId = model.NationalId,
                 UserName = model.Username,
                 NormalizedUserName = model.Username.ToUpper(),
                 Email = model.Email,
@@ -50,6 +55,8 @@ namespace EmployeesManagement.Controllers
                 EmailConfirmed = true,
                 PhoneNumber = model.PhoneNumber,
                 PhoneNumberConfirmed = true,
+                CreatedOn = DateTime.UtcNow,
+                CreatedById = "Macro Code",
 
             };
 
@@ -57,8 +64,10 @@ namespace EmployeesManagement.Controllers
 
             if (result.Succeeded)
                 return RedirectToAction("Index");
+            else
+                return View(model);
 
-            return View(model);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name");
         }
     }
 }
