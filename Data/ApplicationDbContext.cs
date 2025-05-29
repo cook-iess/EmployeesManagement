@@ -38,5 +38,6 @@ namespace EmployeesManagement.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<LeaveApplication> LeaveApplications { get; set; }
+        public DbSet<SystemProfile> SystemProfiles { get; set; }
     }
 }
