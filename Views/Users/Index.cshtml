@@ -5,14 +5,14 @@
     ViewData["Title"] = "System Users";
 }
 
-<h1>Users</h1>
+<h1>System Users</h1>
 
 <div class="card mb-4">
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Manage Users</h5>
+            <h5 class="mb-0">Manage System Users</h5>
             <a asp-action="Create" class="btn btn-primary">
-                <i class="fa fa-plus"></i> Add New User
+                <i class="fa fa-plus"></i> Add New System User
             </a>
         </div>
     </div>
@@ -22,10 +22,10 @@
             <table id="example1" class="table table-hover table-bordered table-striped">
                 <thead class="table-light">
                     <tr>
-                        <th>Serial No</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                        <th>PhoneNo</th>
+                        <th>@Html.DisplayNameFor(model => model.Id)</th>
+                        <th>@Html.DisplayNameFor(model => model.NormalizedEmail)</th>
+                        <th>@Html.DisplayNameFor(model => model.NormalizedUserName)</th>
+                        <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
