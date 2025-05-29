@@ -57,7 +57,7 @@ namespace EmployeesManagement.Controllers
                 PhoneNumberConfirmed = true,
                 CreatedOn = DateTime.UtcNow,
                 CreatedById = "Macro Code",
-
+                RoleId = model.RoleId,
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -67,7 +67,7 @@ namespace EmployeesManagement.Controllers
             else
                 return View(model);
 
-            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name");
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", model.RoleId);
         }
     }
 }
