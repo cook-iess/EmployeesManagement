@@ -27,7 +27,7 @@ namespace EmployeesManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _context.Users.Include(x => x.Role).ToListAsync();
             return View(users);
         }
         [HttpGet]
