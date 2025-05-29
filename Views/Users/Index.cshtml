@@ -22,10 +22,13 @@
             <table id="example1" class="table table-hover table-bordered table-striped">
                 <thead class="table-light">
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.Id)</th>
-                        <th>@Html.DisplayNameFor(model => model.NormalizedEmail)</th>
-                        <th>@Html.DisplayNameFor(model => model.NormalizedUserName)</th>
-                        <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>ID No</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Phone No</th>
+                        <th>User Role</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -34,9 +37,12 @@
                     {
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NationalId)</td>
                             <td>@Html.DisplayFor(modelItem => item.NormalizedEmail)</td>
                             <td>@Html.DisplayFor(modelItem => item.NormalizedUserName)</td>
                             <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Role.Name)</td>
                             <td>
                                 <div class="dropdown">
                                     <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button"
